@@ -1,0 +1,126 @@
+https://leetcode.com/problems/merge-strings-alternately/?envType=study-plan-v2&envId=leetcode-75
+My Code- 
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+
+        String merged= new String();
+
+        if(word1.length()>word2.length())
+        {
+            int diff=word1.length()-word2.length();
+            System.out.println(diff);
+            int remainWord1len = word1.length()-diff;
+            System.out.println(remainWord1len);
+            char[] word1PartToShuffle= new char[remainWord1len];
+            String word1Remain= word1.substring(remainWord1len,word1.length());
+             System.out.println(word1Remain);
+            for(int i=0;i<remainWord1len;i++)
+            {
+                word1PartToShuffle[i] = word1.charAt(i);
+            }
+            char[] word1PartToTrim= new char[word1Remain.length()];
+            for(int i=0;i<word1Remain.length();i++)
+            {
+                word1PartToTrim[i]=word1Remain.charAt(i);
+                //System.out.println(word1PartToTrim[i]);
+            }
+
+        char[] resultArray= new char[word1PartToShuffle.length+ word2.length()];
+
+            resultArray[0]=word1PartToShuffle[0];
+            for(int i=1;i<word1PartToShuffle.length;i++)
+            {
+                resultArray[i*2]=word1PartToShuffle[i];
+            }
+
+            resultArray[1]=word2.charAt(0);
+            for(int i=1;i<word2.length();i++)
+            {
+                resultArray[i*2+1]=word2.charAt(i);
+            }
+
+            String resultString=new String(resultArray);
+             merged= resultString.concat(word1Remain);
+        }
+
+        else if(word2.length()>word1.length())
+        {
+            int diff=word2.length()-word1.length();
+             System.out.println(diff);
+            int remainWord2len = word2.length()-diff;
+             System.out.println(remainWord2len);
+            char[] word2PartToShuffle= new char[remainWord2len];
+            String word2Remain= word2.substring(remainWord2len,word2.length());
+            System.out.println(word2Remain);
+
+            for(int i=0;i<remainWord2len;i++)
+            {
+                word2PartToShuffle[i] = word2.charAt(i);
+                System.out.println(word2PartToShuffle);
+            }
+            
+            char[] word2PartToTrim= new char[word2Remain.length()];
+            for(int i=0;i<word2Remain.length();i++)
+            {
+                word2PartToTrim[i]=word2Remain.charAt(i);
+            }
+
+        char[] resultArray= new char[word2PartToShuffle.length+ word1.length()];
+
+             resultArray[0]=word1.charAt(0);
+            for(int i=1;i<word1.length();i++)
+            {
+                resultArray[i*2]=word1.charAt(i);
+            }
+
+           // resultArray[1]=word2PartToShuffle[0];
+            for(int i=0;i<word2PartToShuffle.length;i++)
+            {
+                resultArray[i*2+1]=word2PartToShuffle[i];
+            }
+           
+
+            String resultString=new String(resultArray);
+            System.out.println(resultString);
+             merged= resultString.concat(word2Remain);
+        }
+
+        else
+        {
+             char[] resultArray= new char[word1.length()+word2.length()];
+
+             //resultArray[0]=word1.charAt(0);
+             //resultArray[1]=word2.charAt(0);
+            int j=0;
+            for(int i=0;i<resultArray.length;i++)
+            {
+                
+                if(i%2==0)
+                {
+                    // System.out.println(j);
+                    resultArray[i]=word1.charAt(j);
+                    j++;
+                    
+                }
+                
+            }
+            int k=0;
+             for(int i=0;i<resultArray.length;i++)
+            {
+                if(i%2==1)
+                {
+                    resultArray[i]=word2.charAt(k);
+                    k++;
+                     //System.out.println(k);
+                }
+               
+                
+            }
+
+            String resultString=new String(resultArray);
+             merged= resultString;
+        }
+        
+        return merged;
+    }
+}
